@@ -5,19 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eric Archerman</title>
     <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        .markdown-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+    </style>
 </head>
 <body>
     <main>
-        <h1>Eric Archerman</h1>
-        <p>I'm a sophomore at Roxbury Latin School studying computer science and mathematics.</p>
-        <p>I'm interested in AI, zero-knowledge virtual machines, and options trading.</p>
-        
-        <div class="links">
-            <a href="mailto:your.email@example.com">Email</a>
-            <a href="https://github.com/yourusername">GitHub</a>
-            <a href="https://twitter.com/yourusername">Twitter</a>
-            <a href="https://linkedin.com/in/yourusername">LinkedIn</a>
-        </div>
+        <div class="markdown-content" id="markdown-content"></div>
     </main>
+    <script>
+        fetch('site.md')
+            .then(response => response.text())
+            .then(markdown => {
+                document.getElementById('markdown-content').innerHTML = marked.parse(markdown);
+            })
+            .catch(error => {
+                console.error('Error loading markdown:', error);
+                document.getElementById('markdown-content').innerHTML = '<p>Error loading content</p>';
+            });
+    </script>
 </body>
 </html>
